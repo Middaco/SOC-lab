@@ -1,4 +1,14 @@
-# SOC-lab
+# Local SOC laboratory using Azure
+## Laboratory breakdown:
+- Host machine that runs Linux Mint
+- Virtual Machine running Windows 11, configured via KVM
+- An active Microsoft Azure subscription which enables the Cloud component of the lab:
+    - The VM is onboarded in Azure Arc and contains the Azure Monitoring Agent extension
+    - Log Analytics Workspace
+    - Sentinel
+    - Data Connector, associated with the created Sentinel that connects the Windows 11 VM with the Log Analytics Workspace
+    - Analytic Rules, which enable the Alert feature, giving the possibility of configuring rules to alert the analyst that further investigation is needed
+## Laboratory diagram:
 ```mermaid
 flowchart TD
     subgraph LOCAL["🏠 Local Infrastructure (Linux Mint Host)"]
@@ -17,8 +27,8 @@ flowchart TD
 
     subgraph CLOUD["☁️ Microsoft Azure Cloud Platform"]
         direction TB
-        DC["⚡ Data Connector / DCR (Data Collection Rule)"]
-        LAW[("🗄️ Log Analytics Workspace\n(System Backbone)")]
+        DC["⚡ Data Connector"]
+        LAW[("🗄️ Log Analytics Workspace")]
         DEFENDER["🛡️ Microsoft Defender Portal"]
         SENTINEL["🔍 Microsoft Sentinel (SIEM)"]
 
